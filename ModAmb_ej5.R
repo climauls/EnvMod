@@ -18,10 +18,15 @@ k=0.345
 t=3
 Lo=DBO3/(1-exp(-k*t)); Lo
 
+#creación de un vector de tiempo
 t=seq(0,20,1)
+#nivel de DBO ultima
 ult=rep(Lo,21)
+#carga orgánica en función del tiempo
 L=Lo*exp(-k*t)
+#DBO en función del tiempo
 DBO=Lo*(1-exp(-k*t))
+#gráfico de DBO y L en los mismos ejes
 par(mar=c(5, 5, 3, 5))
 plot(t,L, type="l", col="black", main="perfil DBO", xlab="day", ylab="L(mg/l)")
 #incluir eje secundario en y
@@ -31,7 +36,6 @@ axis(side = 4)
 mtext("DBO(mg/l)", side = 4, line = 3)
 legend("topleft", c("L", "DBO"),
        col = c("black", "red"), lty = c(1, 2))
-
 lines(t,ult, lty=2)
 
 #***************************************************************
@@ -65,7 +69,7 @@ Cs=9.07
 Do=Cs-OD
 # constante de degradacion k1 (d-1)
 k1=0.2
-# constante de reaireacion k2 (d-1) segun ecuacion Oconnos-Davis
+# constante de reaireacion k2 (d-1) segun ecuacion O´connor-Dobbins
 k2=5.32*U^0.67/H^1.85
 k2
 
