@@ -1,0 +1,80 @@
+#***********************************************************
+#
+#  Modelamiento Ambiental con aplicaciones en R
+#
+#  Profesor Jorge E. Pachon
+#
+#***********************************************************
+
+Datos meteorologicos
+
+dataset <- read.csv("cont-ozono.csv")
+#Nombre de columnas
+colnames(dataset)
+#Numero de columnas
+length(dataset)
+#Nombre de filas
+rownames(dataset)
+#numero de observaiones
+nrow(dataset)
+#Extraer las primeras 6 filas
+dataset[1:6,]
+
+#Concentracion de Ozono
+ozono <- dataset[,"Ozone"]
+RS <- dataset[,"Solar.R"]
+T <- dataset[,"Temp"]
+Mes <- dataset[,"Month"]
+Dia <- dataset[,"Day"]
+
+#promedio de ozono sin incluir valores NA
+mean(ozono,na.rm=TRUE)
+#retirando NA de los datos de ozono
+ozono_na = na.omit(dataset[,"Ozone"])
+mean(ozono_na)
+#calculo de la mediana
+median(ozono_na)
+#resumen de los datos
+summary(ozono_na)
+
+mean(RS,na.rm=TRUE)
+mean(T)
+#desviacion estandar
+sd(ozono, na.rm=TRUE)
+sqrt(var(ozono, na.rm=TRUE))
+
+#Extraer los valores en los cuales ozono>31 y Tem>90
+subset(dataset, Ozone > 31 & Temp > 90)
+
+ALGUNOS TIPOS DE GRAFICAS
+
+#Histogramas
+hist(ozono, main='Ozono')
+
+#Diagrama de cajas
+boxplot(ozono, main='Ozono')
+
+#Series de tiempo
+par(mar = c(5, 5, 3, 5))
+plot(T, type="l", xlab="day", ylab="temp(F)")
+#incluir eje secundario en y
+par(new=TRUE)
+plot(ozono, type="l", xaxt = "n", yaxt = "n", xlab="", ylab="", col="red", lty=2) 
+axis(side = 4)
+mtext("ozono(ppb)", side = 4, line = 2)
+legend("topleft", c("temp", "ozono"),
+       col = c("black", "red"), lty = c(1, 2))
+
+DIAGRAMAS XvsY
+#cambiar a color rojo
+plot(T,ozono, main='T vs Ozono', col="red", xlab='T (F)', ylab='Ozono (ppb)')
+
+
+#ajustar una regression lineal
+abline(lm(ozono~T))
+
+REGRESION LINEAL OZONO ENTRE T
+reg <- lm(ozono ~ T)
+summary(reg)
+
+
