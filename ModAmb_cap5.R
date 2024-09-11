@@ -6,7 +6,7 @@
 #
 #***********************************************************
 #
-# Modelaci髇 de calidad del agua en lagos
+# Modelaci贸n de calidad del agua en lagos
 #
 # Ejemplo 1
 #
@@ -18,21 +18,21 @@ h=2
 W=140000
 #caudal (m3/d)
 Q=7500
-#constante degradaci髇 (d-1)
+#constante degradaci贸n (d-1)
 k=0.319
 #velocidad sedimentacion (m/d)
 vs = 0.1
 #area de sedimentacion (m2)
 As = V/h
-#c醠culo del factor lambda (y)
+#c谩lculo del factor lambda (y)
 y =(Q + k*V + vs*As); y
 
 #Concentracion en estado estable (mg/L)
 Css = W/y; Css
 
-#Concentraci髇 en estado din醡ico (mg/L)
+#Concentraci贸n en estado din谩mico (mg/L)
 t=seq(0,25,1)
-C = W/(y*V)*(1-exp(-y*t)); C
+C = W/y*(1-exp(-y/V*t)); C
 plot(t,C, type="l", main="Concentracion vs tiempo lago bien mezclado", xlab="t(d)", ylab="C(mg/L)")
 
 #***********************************************************************
@@ -51,9 +51,9 @@ tr=4.6
 Q=V/tr
 #carga de desechos (g/yr)
 W=2000E6
-#constante degradaci髇 (yr-1)
+#constante degradaci贸n (yr-1)
 k=0.1
-#concentraci髇 de entrada (mg/L)
+#concentraci贸n de entrada (mg/L)
 Cin=15
 
 #Concentracion en el estado estable (mg/L)
@@ -69,14 +69,14 @@ Css = (W + Q*Cin) / (Q + k*V); Css
 m=Q/V*Cin
 y=(Q/V+k)
 
-#Concentraci髇 en estado din醡ico (mg/L)
+#Concentraci贸n en estado din谩mico (mg/L)
 Co=Css
 t=seq(0,20,1)
-#si la concentraci髇 inicial es cero (0)
+#si la concentraci贸n inicial es cero (0)
 C = m/y*(1-exp(-y/V*t))
 plot(t,C, type="l", main="Concentracion vs tiempo lago bien mezclado", xlab="t(yr)", ylab="C(mg/L)")
 
-#si la concentraci髇 inicial es diferente de cero (0)
+#si la concentraci贸n inicial es diferente de cero (0)
 #Co
 #C = m/y*(1-exp(-y/V*t))+Co*exp(-y/V*t)
 
